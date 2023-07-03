@@ -11,6 +11,7 @@ public class BackUpPerson {
 
     public BackUpPerson() {
     }
+
     public static void backUpPerson(String idNumber, Person person) {
         try (FileWriter fileWriter = new FileWriter(fileName, true)) {
             String line = idNumber + "=" + person + "\n";

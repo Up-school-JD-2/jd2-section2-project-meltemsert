@@ -3,6 +3,7 @@ package service;
 import backup.BackUpApplication;
 import data.Application;
 import data.Phone;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -27,9 +28,10 @@ public class ManagementApp implements Management<Application> {
                 double newFilledSpace = phone.getFilledSpace() + application.getSize();
                 phone.setFilledSpace(newFilledSpace);
             });
-            BackUpApplication.backUpApplication(application.getApplicationId(),application);
+            BackUpApplication.backUpApplication(application.getApplicationId(), application);
         }
     }
+
     @Override
     public Application remove(String applicationId) {
         updateStorageSpace(String.valueOf(applications.get(applicationId)), (phone) -> {
@@ -46,6 +48,7 @@ public class ManagementApp implements Management<Application> {
     public void updateVersion(String applicationId, String version) {
         edit(applicationId, application -> application.setVersion(version));
     }
+
     public void listApplication() {
         Iterator<Application> it = applications.values().iterator();
         while (it.hasNext()) {
@@ -53,6 +56,7 @@ public class ManagementApp implements Management<Application> {
             System.out.println("Applications in your phone book: " + app);
         }
     }
+
     public void updateStorageSpace(String applicationId, Consumer<Phone> updateFunction) {
         updateFunction.accept(phone);
     }

@@ -1,6 +1,7 @@
 package comparator;
 
 import data.Person;
+
 import java.util.Comparator;
 
 public class PersonNameComparator implements Comparator<Person> {

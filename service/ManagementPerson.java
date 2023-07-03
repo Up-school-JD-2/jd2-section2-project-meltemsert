@@ -3,19 +3,22 @@ package service;
 import backup.BackUpPerson;
 import category.PersonType;
 import data.Person;
+
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class ManagementPerson implements Management<Person>,Sort<Person> {
+public class ManagementPerson implements Management<Person>, Sort<Person> {
     private Map<String, Person> people = new HashMap<>();
+
     @Override
     public void add(Person person) {
         people.put(person.getPersonId(), person);
         System.out.println("The person has been successfully added to your phone book " + person);
         BackUpPerson.backUpPerson(person.getPersonId(), person);
     }
+
     @Override
     public Person remove(String personId) {
         return people.remove(personId);
@@ -73,11 +76,13 @@ public class ManagementPerson implements Management<Person>,Sort<Person> {
     public void sort(Map<String, Person> map, Comparator<Person> comparator) {
         map.values().stream().sorted(comparator).toList().forEach(System.out::println);
     }
-    public Map<PersonType, List<Person>> categoryPerson(){
-        Map<PersonType, List<Person>> categoryPerson=  people.values().stream()
+
+    public Map<PersonType, List<Person>> categoryPerson() {
+        Map<PersonType, List<Person>> categoryPerson = people.values().stream()
                 .collect(Collectors.groupingBy(Person::getPersonType));
-      return categoryPerson;
+        return categoryPerson;
     }
+
     public void listPerson() {
         Iterator<Person> it = people.values().iterator();
         while (it.hasNext()) {

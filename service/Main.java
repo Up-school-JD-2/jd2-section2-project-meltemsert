@@ -25,6 +25,7 @@ public class Main {
             writeMenu();
         }
     }
+
     private static void writeMenu() {
         int choice;
         do {
@@ -64,12 +65,12 @@ public class Main {
                                     String surName = scan.nextLine();
                                     System.out.println("Enter the person phone number");
                                     String phoneNumber = scan.nextLine();
-                                    if(!isValidNumber(phoneNumber)){
+                                    if (!isValidNumber(phoneNumber)) {
                                         throw new InValidNumberException("Phone number is invalid. Must be 11 digit numbers");
                                     }
                                     System.out.println("Enter the person email");
                                     String email = scan.nextLine();
-                                    if(!isValidEmail(email)){
+                                    if (!isValidEmail(email)) {
                                         throw new EmailInvalidException("Email is invalid. " +
                                                 "Must contain at least one '@' character and end with .com.");
                                     }
@@ -77,7 +78,7 @@ public class Main {
                                     PersonType personType = PersonType.valueOf(scan.nextLine());
                                     Person person = new Person(name, surName, phoneNumber, email, personType);
                                     managePer.add(person);
-                                } catch (InValidNumberException e){
+                                } catch (InValidNumberException e) {
                                     System.out.println(e.getMessage());
                                 } catch (EmailInvalidException e) {
                                     System.out.println(e.getMessage());
@@ -142,7 +143,8 @@ public class Main {
                                         case 0 -> {
 
                                         }
-                                        default -> System.out.println("You have entered incorrectly, press 0 for the top menu.");
+                                        default ->
+                                                System.out.println("You have entered incorrectly, press 0 for the top menu.");
                                     }
                                 } while (inChoice != 0);
                             }
@@ -153,13 +155,13 @@ public class Main {
                                 managePer.callPerson(personId);
                             }
                             case 6 -> {
-                                PersonNameComparator nameComparator=new PersonNameComparator();
-                                managePer.sort(managePer.getPeople(),nameComparator);
+                                PersonNameComparator nameComparator = new PersonNameComparator();
+                                managePer.sort(managePer.getPeople(), nameComparator);
                             }
                             case 7 -> {
                                 System.out.println(managePer.categoryPerson());
                             }
-                            case 8 ->{
+                            case 8 -> {
                                 innerChoice = 0;
                                 choice = -1;
                             }
@@ -254,7 +256,8 @@ public class Main {
                             case 0 -> {
 
                             }
-                            default -> System.out.println("You have entered incorrectly number, press 0 for the top menu.");
+                            default ->
+                                    System.out.println("You have entered incorrectly number, press 0 for the top menu.");
                         }
                     } while (innerChoice != 0);
                 }
@@ -264,6 +267,7 @@ public class Main {
             }
         } while (choice != -1);
     }
+
     private static void initData() {
         Person person1 = new Person("Burcu", "Sert", "05395575655", "burcusert@gmail.com", PersonType.FAMILY);
         Person person2 = new Person("Polat", "Sert", "05697215457", "polatsert@gmail.com", PersonType.FAMILY);
@@ -306,6 +310,7 @@ public class Main {
         manageApp.add(app9);
         manageApp.add(app10);
     }
+
     private static boolean isValidNumber(String number) {
         if (number.length() != 11) {
             return false;
