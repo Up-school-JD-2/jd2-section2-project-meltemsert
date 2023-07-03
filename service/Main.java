@@ -1,5 +1,7 @@
 package service;
 
+import reload.ReloadApplication;
+import reload.ReloadPerson;
 import category.ApplicationType;
 import category.PersonType;
 import comparator.PersonNameComparator;
@@ -48,7 +50,8 @@ public class Main {
                         System.out.println("** 5 - Call the contact in your phone book ");
                         System.out.println("** 6 - Sort contacts by name ");
                         System.out.println("** 7 - List by category ");
-                        System.out.println("** 8 - Exit");
+                        System.out.println("** 8 - Reload person information ");
+                        System.out.println("** 9 - Exit");
                         System.out.println("** 0 - Top menu ");
                         System.out.println("*********************************************");
                         innerChoice = scan.nextInt();
@@ -162,6 +165,9 @@ public class Main {
                                 System.out.println(managePer.categoryPerson());
                             }
                             case 8 -> {
+                                System.out.println(ReloadPerson.reload("People.txt"));
+                            }
+                            case 9 -> {
                                 innerChoice = 0;
                                 choice = -1;
                             }
@@ -180,7 +186,8 @@ public class Main {
                         System.out.println("** 2 - Add app on your phone");
                         System.out.println("** 3 - Remove app on your phone");
                         System.out.println("** 4 - Update app on your phone");
-                        System.out.println("** 5 - Exit");
+                        System.out.println("** 5 - Reload application information");
+                        System.out.println("** 6 - Exit");
                         System.out.println("** 0 - Top menu ");
                         System.out.println("*********************************************");
                         innerChoice = scan.nextInt();
@@ -218,6 +225,9 @@ public class Main {
                                 manageApp.updateVersion(applicationId, version);
                             }
                             case 5 -> {
+                                System.out.println(ReloadApplication.reload("Application.txt"));
+                            }
+                            case 6 -> {
                                 innerChoice = 0;
                                 choice = -1;
                             }

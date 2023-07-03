@@ -13,7 +13,7 @@ public class BackUpApplication {
 
     public static void backUpApplication(String idNumber, Application application) {
         try (FileWriter fileWriter = new FileWriter(fileName, true)) {
-            String line = idNumber + "=" + application + "\n";
+            String line = idNumber + ":" + application + "\n";
             fileWriter.write(line);
             System.out.println("Applications backed up.");
         } catch (IOException e) {
