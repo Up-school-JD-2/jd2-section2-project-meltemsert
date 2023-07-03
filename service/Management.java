@@ -8,6 +8,4 @@ public interface Management<T> {
     T remove(String id);
 
     void edit(String id, Consumer<T> consumer);
-
-
 }

@@ -1,30 +1,27 @@
 package data;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 public class Phone {
     private final String phoneId;
     private String brand;
     private String model;
     private String serialNumber;
-    private int storageSpace;
-    private int filledSpace;
-    private int freeSpace;
+    private double storageSpace;
+    private double filledSpace;
+    private double freeSpace;
     private String os;
 
-    public Phone(String brand, String model, String serialNumber, int storageSpace, String os) {
+    public Phone(String brand, String model, String serialNumber, double storageSpace, String os) {
         this.phoneId = UUID.randomUUID().toString();
         this.brand = brand;
         this.model = model;
         this.serialNumber = serialNumber;
         this.storageSpace = storageSpace;
         this.os = os;
-        this.freeSpace = storageSpace - filledSpace;
+        this.freeSpace = this.storageSpace;
+        filledSpace = 0;
     }
 
     public String getPhoneId() {
@@ -55,7 +52,7 @@ public class Phone {
         this.serialNumber = serialNumber;
     }
 
-    public int getStorageSpace() {
+    public double getStorageSpace() {
         return storageSpace;
     }
 
@@ -63,19 +60,20 @@ public class Phone {
         this.storageSpace = storageSpace;
     }
 
-    public int getFilledSpace() {
+    public double getFilledSpace() {
         return filledSpace;
     }
 
-    public void setFilledSpace(int filledSpace) {
+    public void setFilledSpace(double filledSpace) {
         this.filledSpace = filledSpace;
+        setFreeSpace(getStorageSpace() - filledSpace);
     }
 
-    public int getFreeSpace() {
+    public double getFreeSpace() {
         return freeSpace;
     }
 
-    public void setFreeSpace(int freeSpace) {
+    public void setFreeSpace(double freeSpace) {
         this.freeSpace = freeSpace;
     }
 
@@ -93,7 +91,7 @@ public class Phone {
 
     @Override
     public String toString() {
-        return "data.Phone{" +
+        return "Phone{" +
                 "phoneId='" + phoneId + '\'' +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +

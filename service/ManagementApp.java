@@ -6,13 +6,15 @@ import data.Phone;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class ManagementApp implements Management<Application> {
     private Phone phone;
-    private Application application;
     private Map<String, Application> applications = new HashMap<>();
+
+    public ManagementApp(Phone phone) {
+        this.phone = phone;
+    }
 
     @Override
     public void add(Application application) {
@@ -21,8 +23,8 @@ public class ManagementApp implements Management<Application> {
         } else {
             applications.put(application.getApplicationId(), application);
             System.out.println("The application has been successfully added to your phone book " + application);
-            updateStorageSpace(application.getApplicationId(), application.getSize(), (app, phone) -> {
-                int newFilledSpace = phone.getFilledSpace() + app.getSize();
+            updateStorageSpace(application.getApplicationId(), (phone) -> {
+                double newFilledSpace = phone.getFilledSpace() + application.getSize();
                 phone.setFilledSpace(newFilledSpace);
             });
         }
@@ -30,21 +32,19 @@ public class ManagementApp implements Management<Application> {
 
     @Override
     public Application remove(String applicationId) {
-        applications.remove(applicationId);
-        updateStorageSpace(applicationId, applications.get(applicationId).getSize(), (application, phone) -> {
-            int newStorageSpace = phone.getFilledSpace() - application.getSize();
-            phone.setFilledSpace(newStorageSpace);
+        updateStorageSpace(String.valueOf(applications.get(applicationId)), (phone) -> {
+            phone.setFilledSpace(phone.getFilledSpace() - applications.get(applicationId).getSize());
         });
-        return application;
+        return applications.remove(applicationId);
     }
 
     @Override
-    public void edit(String appId, Consumer<Application> updateApplication) {
-        updateApplication.accept(applications.get(appId));
+    public void edit(String applicationId, Consumer<Application> updateApplication) {
+        updateApplication.accept(applications.get(applicationId));
     }
 
-    public void updateVersion(String appid, String version) {
-        edit(appid, application -> application.setVersion(version));
+    public void updateVersion(String applicationId, String version) {
+        edit(applicationId, application -> application.setVersion(version));
     }
 
     public void listApplication() {
@@ -55,7 +55,11 @@ public class ManagementApp implements Management<Application> {
         }
     }
 
-    public void updateStorageSpace(String applicationId, int size, BiConsumer<Application, Phone> updateFunction) {
-        updateFunction.accept(applications.get(applicationId), phone);
+    public void updateStorageSpace(String applicationId, Consumer<Phone> updateFunction) {
+        updateFunction.accept(phone);
+    }
+
+    public void sumSize() {
+        applications.values().stream().mapToDouble(Application::getSize).sum();
     }
 }

@@ -10,11 +10,11 @@ public class Application {
     private final String applicationId;
     private String name;
     private String version;
-    private int size;
+    private double size;
     private ApplicationType applicationType;
     private ApplicationIdSupplier applicationIdSupplier = new ApplicationIdSupplier();
 
-    public Application(String name, String version, int size, ApplicationType applicationType) {
+    public Application(String name, String version, double size, ApplicationType applicationType) {
         this.applicationType = applicationType;
         applicationIdSupplier.registerApplicationIdSupplier(this.applicationType.name(), () ->
                 this.applicationType.name().substring(0, 5) + "-" + UUID.randomUUID());
@@ -44,11 +44,11 @@ public class Application {
         this.version = version;
     }
 
-    public int getSize() {
+    public double getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(double size) {
         this.size = size;
     }
 
@@ -58,14 +58,6 @@ public class Application {
 
     public void setApplicationType(ApplicationType applicationType) {
         this.applicationType = applicationType;
-    }
-
-    public ApplicationIdSupplier getApplicationIdSupplier() {
-        return applicationIdSupplier;
-    }
-
-    public void setApplicationIdSupplier(ApplicationIdSupplier applicationIdSupplier) {
-        this.applicationIdSupplier = applicationIdSupplier;
     }
 
     @Override

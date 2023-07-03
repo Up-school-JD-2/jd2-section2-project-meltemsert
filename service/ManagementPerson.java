@@ -19,11 +19,13 @@ public class ManagementPerson implements Management<Person> {
 
     @Override
     public Person remove(String personId) {
+
         return people.remove(personId);
     }
 
     @Override
     public void edit(String personId, Consumer<Person> updatePerson) {
+
         updatePerson.accept(people.get(personId));
     }
 
