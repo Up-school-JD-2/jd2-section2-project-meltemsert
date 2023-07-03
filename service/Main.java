@@ -2,6 +2,7 @@ package service;
 
 import category.ApplicationType;
 import category.PersonType;
+import comparator.PersonNameComparator;
 import data.Application;
 import data.Person;
 import data.Phone;
@@ -43,8 +44,10 @@ public class Main {
                         System.out.println("** 2 - Add contacts to your phone book");
                         System.out.println("** 3 - Remove contacts to your phone book");
                         System.out.println("** 4 - Make changes to your contacts");
-                        System.out.println("** 5 - Search the contact in your phone book ");
-                        System.out.println("** 6 - Exit");
+                        System.out.println("** 5 - Call the contact in your phone book ");
+                        System.out.println("** 6 - Sort contacts by name ");
+                        System.out.println("** 7 - List by category ");
+                        System.out.println("** 8 - Exit");
                         System.out.println("** 0 - Top menu ");
                         System.out.println("*********************************************");
                         innerChoice = scan.nextInt();
@@ -150,6 +153,13 @@ public class Main {
                                 managePer.callPerson(personId);
                             }
                             case 6 -> {
+                                PersonNameComparator nameComparator=new PersonNameComparator();
+                                managePer.sort(managePer.getPeople(),nameComparator);
+                            }
+                            case 7 -> {
+                                System.out.println(managePer.categoryPerson());
+                            }
+                            case 8 ->{
                                 innerChoice = 0;
                                 choice = -1;
                             }
@@ -254,16 +264,15 @@ public class Main {
             }
         } while (choice != -1);
     }
-
     private static void initData() {
-        Person person1 = new Person("Burcu", "Sert", "05395575655", "burcusert@", PersonType.FAMILY);
-        Person person2 = new Person("Polat", "Sert", "05697215457", "polatsert@", PersonType.FAMILY);
-        Person person3 = new Person("Fadile", "Avci", "05367259632", "fadileavci@", PersonType.FRIENDS);
-        Person person4 = new Person("Zeynep", "Özdemir", "05419876532", "zeynepozturk@", PersonType.FRIENDS);
-        Person person5 = new Person("Kübra", "Kaya", "05378786323", "kubrakaya@", PersonType.WORKFRIENDS);
-        Person person6 = new Person("Emine", "Çamlıcalı", "05557896359", "eminecamlicali@", PersonType.WORKFRIENDS);
-        Person person7 = new Person("Aslı", "Öztürk", "05468763679", "burcusert@", PersonType.OTHER);
-        Person person8 = new Person("Esra", "Demir", "05429638754", "esrademir@", PersonType.OTHER);
+        Person person1 = new Person("Burcu", "Sert", "05395575655", "burcusert@gmail.com", PersonType.FAMILY);
+        Person person2 = new Person("Polat", "Sert", "05697215457", "polatsert@gmail.com", PersonType.FAMILY);
+        Person person3 = new Person("Fadile", "Avci", "05367259632", "fadileavci@gmail.com", PersonType.FRIENDS);
+        Person person4 = new Person("Zeynep", "Özdemir", "05419876532", "zeynepozturk@gmail.com", PersonType.FRIENDS);
+        Person person5 = new Person("Kübra", "Kaya", "05378786323", "kubrakaya@gmail.com", PersonType.WORKFRIENDS);
+        Person person6 = new Person("Emine", "Çamlıcalı", "05557896359", "eminecamlicali@gmail.com", PersonType.WORKFRIENDS);
+        Person person7 = new Person("Aslı", "Öztürk", "05468763679", "aslıozturk@gmail.com", PersonType.OTHER);
+        Person person8 = new Person("Esra", "Demir", "05429638754", "esrademir@gmail.com", PersonType.OTHER);
 
         Application app1 = new Application("Instagram", "289.0", 236.2, ApplicationType.SOCIAL_MEDIA);
         Application app2 = new Application("Discord", "183.0", 185.5, ApplicationType.SOCIAL_MEDIA);

@@ -2,7 +2,6 @@ package data;
 
 import category.PersonType;
 import supplier.PersonIdSupplier;
-
 import java.util.Objects;
 import java.util.UUID;
 
